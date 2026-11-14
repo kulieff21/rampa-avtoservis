@@ -1,0 +1,433 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(18px, 3vw, 32px);
+  min-height: 520px;
+}
+
+/* ---------- step lane ---------- */
+.lane {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.lane li {
+  border-top: 4px solid var(--line);
+  transition: border-color 300ms ease;
+}
+.lane li[data-state="done"] {
+  border-color: var(--ink);
+}
+.lane li[data-state="now"] {
+  border-color: var(--paint);
+}
+.lane button {
+  width: 100%;
+  padding: 8px 0 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-weight: 650;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.lane button:disabled {
+  cursor: default;
+}
+.lane li[data-state="todo"] button {
+  color: var(--muted);
+}
+.lane span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+}
+
+/* ---------- services ---------- */
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.service {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  align-items: center;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--concrete);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+.service:hover {
+  border-color: var(--ink);
+}
+.service[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: color-mix(in oklab, var(--paint) 30%, var(--paper));
+}
+.check {
+  grid-row: span 2;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  display: grid;
+  place-items: center;
+  transition: background 160ms ease;
+}
+.service[aria-pressed="true"] .check {
+  background: var(--ink);
+}
+.service[aria-pressed="true"] .check::after {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2.5px solid var(--paint);
+  border-bottom: 2.5px solid var(--paint);
+  transform: translateY(-1px) rotate(-45deg);
+}
+.serviceName {
+  font-weight: 650;
+}
+.serviceMeta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- days ---------- */
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+.day {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--concrete);
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+.day:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+.day:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  background: repeating-linear-gradient(-45deg, transparent 0 6px, var(--line) 6px 7px);
+}
+.day[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.dayWd {
+  font-size: 12px;
+  font-weight: 600;
+}
+.dayNo {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.dayMonth {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* ---------- split-flap time board ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--ink);
+  min-height: 80px;
+}
+.board:empty {
+  display: none;
+}
+.flap {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  padding: 10px 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: #23272e;
+  color: #f4f1e8;
+  cursor: pointer;
+  perspective: 300px;
+  animation: flapIn 420ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  transition: background 160ms ease;
+}
+.flap:hover {
+  background: #30353d;
+}
+.flap[aria-pressed="true"] {
+  background: var(--paint);
+  color: var(--ink);
+}
+.flapTime {
+  display: flex;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 20px;
+}
+.digit {
+  position: relative;
+  display: inline-block;
+  width: 1.05ch;
+  padding: 2px 1px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+.digit::after {
+  /* the hinge line across a split-flap tile */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.45);
+}
+.flap[aria-pressed="true"] .digit {
+  background: rgba(0, 0, 0, 0.1);
+}
+.colon {
+  opacity: 0.6;
+}
+.flapFree {
+  font-size: 11px;
+  opacity: 0.65;
+}
+@keyframes flapIn {
+  from {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- contact fields ---------- */
+.fields {
+  display: grid;
+  gap: 16px;
+  max-width: 520px;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.field input,
+.field textarea {
+  font-weight: 400;
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--concrete);
+  transition: border-color 160ms ease;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+  background: #fff;
+}
+.field[data-invalid="true"] input {
+  border-color: var(--stop);
+}
+.field em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--stop);
+  font-size: 13px;
+}
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.hint,
+.note {
+  color: var(--muted);
+  font-size: 14px;
+}
+.note {
+  margin-bottom: 12px;
+}
+.error {
+  color: var(--stop);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ---------- job sheet (right) ---------- */
+.sheet {
+  position: sticky;
+  top: 88px;
+  border-radius: 20px;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+.sheetCar {
+  display: grid;
+  place-items: center;
+  padding: 22px 0 10px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+.sheetCar svg {
+  width: 120px;
+  height: auto;
+}
+.sheetBody {
+  padding: 18px 20px 22px;
+  display: grid;
+  gap: 14px;
+}
+.sheetList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+.sheetList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sheetList li span:last-child {
+  font-family: var(--font-mono);
+  opacity: 0.8;
+}
+.totals {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  border-top: 1px dashed rgba(244, 241, 232, 0.25);
+  padding-top: 12px;
+}
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.totals dt {
+  font-size: 13px;
+  opacity: 0.7;
+}
+.totals dd {
+  margin: 0;
+  font-family: var(--font-mono);
+}
+.big {
+  font-family: var(--font-display) !important;
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 30px;
+  color: var(--paint);
+}
+.roll {
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.roll span {
+  display: inline-block;
+}
+.when {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--paint);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sheet {
+    position: static;
+    order: -1;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+  }
+  .sheetCar {
+    border-radius: 20px 0 0 20px;
+    border-bottom: 1.5px solid var(--line);
+    padding: 12px 0;
+  }
+  .sheetCar svg {
+    width: 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
+  .days {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .lane button {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flap {
+    animation: none;
+  }
+}
