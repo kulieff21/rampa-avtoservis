@@ -1,0 +1,191 @@
+.page {
+  padding-top: clamp(28px, 5vw, 56px);
+  max-width: 640px;
+  display: grid;
+  justify-items: center;
+}
+
+/* the "printer" the card comes out of */
+.slot {
+  width: 100%;
+  height: 18px;
+  border-radius: 10px;
+  background: var(--ink);
+  box-shadow: inset 0 -6px 0 #000;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  --cut: 10px;
+  width: calc(100% - 28px);
+  margin-top: -8px;
+  padding: 30px clamp(18px, 4vw, 34px) 26px;
+  background: #fbfaf6;
+  color: var(--ink);
+  /* torn-off perforation along the bottom edge */
+  mask:
+    radial-gradient(circle at 50% 100%, transparent 5px, #000 5.5px) 0 100% / 16px 12px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - 11px) no-repeat;
+  box-shadow: 0 30px 50px -30px rgba(0, 0, 0, 0.45);
+  animation: print 1.1s cubic-bezier(0.25, 0.9, 0.3, 1) both;
+  transform-origin: top center;
+}
+@keyframes print {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-40px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+.card[data-cancelled="true"] {
+  filter: grayscale(1);
+  opacity: 0.75;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 10px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.codeRow {
+  padding: 22px 0 18px;
+  border-bottom: 1px dashed var(--line);
+}
+.code {
+  display: flex;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(30px, 8vw, 46px);
+}
+.code span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.15em;
+  padding: 2px 4px;
+  border-radius: 6px;
+  background: var(--paint);
+  animation: stamp 260ms ease-out both;
+}
+.code span:nth-child(2) {
+  background: transparent;
+  min-width: auto;
+}
+@keyframes stamp {
+  from {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+.show {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.cancelled {
+  margin-top: 14px;
+  font-weight: 700;
+  color: var(--stop);
+}
+
+.grid {
+  margin: 0;
+  padding: 18px 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 18px 24px;
+}
+.grid dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.grid dd {
+  margin: 0;
+}
+.grid ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.wide {
+  grid-column: 1 / -1;
+}
+.bay {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1;
+}
+.total {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 26px;
+}
+
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px dashed var(--line);
+  padding-top: 16px;
+}
+.car {
+  width: 54px;
+  height: auto;
+}
+.barcode {
+  height: 40px;
+  width: auto;
+  max-width: 70%;
+  fill: var(--ink);
+}
+
+.actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  animation: fade 400ms 1.2s both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.missing {
+  font-size: 20px;
+  padding: 40px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .code span,
+  .actions {
+    animation: none;
+  }
+}
