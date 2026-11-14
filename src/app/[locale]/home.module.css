@@ -1,0 +1,235 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  padding-top: clamp(32px, 6vw, 72px);
+  padding-bottom: 32px;
+}
+
+.copy {
+  display: grid;
+  gap: 22px;
+}
+
+.title {
+  font-size: clamp(38px, 5.4vw, 70px);
+  font-weight: 800;
+  font-stretch: 118%;
+  text-wrap: balance;
+  animation: titleIn 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes titleIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+}
+
+.lead {
+  font-size: clamp(17px, 1.6vw, 19px);
+  color: var(--ink-2);
+  max-width: 34em;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.floorCol {
+  display: grid;
+  gap: 12px;
+}
+
+.liveLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.liveCaption {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--muted);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--stop);
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--stop) 60%, transparent);
+  animation: ping 1.8s ease-out infinite;
+}
+@keyframes ping {
+  to {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+.floorSkeleton {
+  aspect-ratio: 660 / 470;
+  border-radius: 18px;
+  background: #2b2f35;
+}
+
+.closedNote {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.section {
+  padding-top: clamp(64px, 9vw, 112px);
+}
+
+.sectionHead {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 36px;
+  max-width: 40em;
+}
+.sectionHead h2 {
+  font-size: clamp(30px, 4.2vw, 50px);
+  font-weight: 800;
+}
+.sectionHead p {
+  color: var(--ink-2);
+  font-size: 18px;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  counter-reset: step;
+}
+.steps li {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 26px 22px 28px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+}
+.steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  right: -20px;
+  width: 20px;
+  border-top: 3px dashed var(--paint);
+}
+.steps h3 {
+  font-size: 22px;
+  font-weight: 750;
+}
+.steps p {
+  color: var(--ink-2);
+}
+.stepNo {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+
+.promise {
+  margin-top: clamp(64px, 9vw, 112px);
+  background: var(--paint);
+  padding: clamp(36px, 6vw, 64px) 0;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+.promise p {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: clamp(24px, 3.4vw, 40px);
+  line-height: 1.15;
+  max-width: 24em;
+  text-wrap: balance;
+}
+
+.prices {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 17px;
+}
+.prices th,
+.prices td {
+  text-align: left;
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.prices thead th {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  border-bottom: 2px solid var(--ink);
+}
+.prices td {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.prices td:last-child,
+.prices thead th:last-child {
+  text-align: right;
+}
+.prices tbody th {
+  font-weight: 600;
+}
+.prices tbody th a {
+  text-decoration: none;
+}
+.prices tbody tr:hover {
+  background: color-mix(in oklab, var(--paint) 14%, transparent);
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+  .steps li:not(:last-child)::after {
+    top: auto;
+    bottom: -20px;
+    right: auto;
+    left: 50px;
+    width: 0;
+    height: 20px;
+    border-top: 0;
+    border-left: 3px dashed var(--paint);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .dot {
+    animation: none;
+  }
+}

@@ -1,0 +1,148 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid var(--ink);
+}
+
+.item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 84px;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: background 200ms ease;
+}
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--paint);
+  transition: width 220ms ease;
+}
+.item[aria-pressed="true"] {
+  background: color-mix(in oklab, var(--paint) 16%, transparent);
+}
+.item[aria-pressed="true"]::before {
+  width: 5px;
+}
+
+.name {
+  font-weight: 650;
+  font-size: 17px;
+}
+.meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+.price {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 20px;
+  text-align: right;
+}
+.price small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  min-height: 520px;
+  border-radius: 24px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  overflow: hidden;
+}
+.grid2 {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
+  opacity: 0.6;
+}
+.car {
+  position: relative;
+  width: min(220px, 52%);
+  height: auto;
+}
+
+.card {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  gap: 6px;
+  max-width: 220px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: var(--paper);
+  animation: rise 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card :global(.eyebrow) {
+  color: var(--paint);
+}
+.card strong {
+  font-size: 17px;
+  line-height: 1.25;
+}
+.card span:not(:global(.eyebrow)) {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0.75;
+}
+.card :global(.btn) {
+  margin-top: 8px;
+  min-height: 40px;
+  justify-content: center;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    order: -1;
+    min-height: 420px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}

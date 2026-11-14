@@ -1,0 +1,77 @@
+.car {
+  --car-line: var(--ink);
+  --car-fill: var(--paper);
+  --car-glass: color-mix(in oklab, var(--ink) 7%, transparent);
+  --car-ghost: color-mix(in oklab, var(--ink) 16%, transparent);
+  --car-part: color-mix(in oklab, var(--ink) 55%, transparent);
+  display: block;
+  overflow: visible;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dark {
+  --car-line: #e9e6dd;
+  --car-fill: #31353c;
+  --car-glass: rgba(233, 230, 221, 0.08);
+  --car-ghost: rgba(233, 230, 221, 0.14);
+  --car-part: rgba(233, 230, 221, 0.45);
+}
+
+.body {
+  fill: var(--car-fill);
+  stroke: var(--car-line);
+  stroke-width: 2;
+}
+
+.glass {
+  fill: var(--car-glass);
+  stroke: var(--car-line);
+  stroke-width: 1.2;
+}
+
+.ghost {
+  fill: none;
+  stroke: var(--car-ghost);
+  stroke-width: 1.2;
+}
+
+.part {
+  fill: none;
+  stroke: var(--car-part);
+  stroke-width: 1.6;
+  transition:
+    stroke 250ms ease,
+    fill 250ms ease,
+    filter 250ms ease;
+}
+
+/* tyres are solid even when off */
+.part rect[height="50"] {
+  fill: var(--car-line);
+  stroke: none;
+}
+
+.part[data-on="true"] {
+  stroke: var(--paint);
+  stroke-width: 2.4;
+  fill: color-mix(in oklab, var(--paint) 28%, transparent);
+  filter: drop-shadow(0 0 5px color-mix(in oklab, var(--paint) 80%, transparent));
+  animation: glow 1.8s ease-in-out infinite;
+}
+
+.part[data-on="true"] rect[height="50"] {
+  fill: var(--paint);
+}
+
+@keyframes glow {
+  50% {
+    filter: drop-shadow(0 0 1px color-mix(in oklab, var(--paint) 40%, transparent));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .part[data-on="true"] {
+    animation: none;
+  }
+}
