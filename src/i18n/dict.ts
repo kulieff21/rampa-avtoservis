@@ -125,15 +125,15 @@ export type Dict = typeof en;
 
 const az: Dict = {
   meta: {
-    title: "Rampa — Bakıda üç boksluq avtoservis",
-    description: "İşi seçin, sabit qiyməti görün, boş boksu tutun. Bakıda avtoservisə onlayn yazılış.",
+    title: "Rampa — Bakıda üç qaldırıcılı avtoservis",
+    description: "İşi seçin, sabit qiyməti görün, boş qaldırıcını tutun. Bakıda avtoservisə onlayn yazılış.",
   },
-  nav: { services: "Xidmətlər", prices: "Qiymətlər", how: "Necə işləyir", book: "Boks tut" },
+  nav: { services: "Xidmətlər", prices: "Qiymətlər", how: "Necə işləyir", book: "Yazıl" },
   hero: {
-    eyebrow: "Üç boksluq avtoservis · Bakı",
-    title: (when) => (when ? `${when} — maşınınız rampada.` : "Maşınınız vaxtında rampada."),
-    lead: "İşi seçin, qiyməti görün, həqiqətən boş olan boksu tutun. Zəng yoxdur, “gəlin baxaq” yoxdur.",
-    cta: "Boks tut",
+    eyebrow: "Üç qaldırıcılı avtoservis · Bakı",
+    title: (when) => (when ? `${when} — maşınınız qaldırıcıda.` : "Maşınınız vaxtında qaldırıcıda."),
+    lead: "İşi seçin, qiyməti görün, həqiqətən boş olan qaldırıcını tutun. Zəng yoxdur, “gəlin baxaq” yoxdur.",
+    cta: "Servisə yazıl",
     secondary: "Qiymətlər",
   },
   when: (date, start, today, tomorrow) => {
@@ -144,8 +144,8 @@ const az: Dict = {
   },
   floor: {
     live: "Canlı zal",
-    caption: "Üç rampamızda indi nə var. Özü yenilənir.",
-    bay: "Boks",
+    caption: "Üç qaldırıcımızda indi nə var. Özü yenilənir.",
+    bay: "Qaldırıcı",
     free: "Boş",
     until: (t) => `${t}-dək`,
     next: (t) => `növbəti iş ${t}`,
@@ -156,7 +156,7 @@ const az: Dict = {
   },
   services: {
     title: "İşi seçin. Hissəni görün.",
-    lead: "Hər işin qiyməti və rampada vaxtı əvvəlcədən bəllidir. Üzərinə gəlin, harada aparıldığını görün.",
+    lead: "Hər işin qiyməti və müddəti əvvəlcədən bəllidir. Üzərinə gəlin, harada aparıldığını görün.",
     min: "dəq",
     azn: "AZN",
     parts: {
@@ -167,8 +167,8 @@ const az: Dict = {
   how: {
     title: "Üç addım, bir iş kartı.",
     steps: [
-      ["İşi seçin", "Qiymət və rampada vaxt gəlməmişdən əvvəl bəllidir."],
-      ["Boş boksu tutun", "Yalnız rampanın həqiqətən boş olduğu saatları görürsünüz."],
+      ["İşi seçin", "Qiymət və müddət gəlməmişdən əvvəl bəllidir."],
+      ["Boş qaldırıcını tutun", "Yalnız qaldırıcının həqiqətən boş olduğu saatları görürsünüz."],
       ["Kodla gəlin", "İş kartınızın kodu var. Darvazada göstərin."],
     ],
   },
@@ -180,19 +180,19 @@ const az: Dict = {
     fiction: "Rampa portfolio üçün qurulmuş uydurma avtoservisdir. Sifarişlər real verilənlər bazası sətirləridir; demo işlər hər gün yaradılır.",
   },
   book: {
-    title: "Boks tut",
+    title: "Servisə yazıl",
     steps: ["İş", "Gün", "Saat", "Siz"],
     next: "Növbəti",
     back: "Geri",
     confirm: "Təsdiqlə",
     sending: "Göndərilir…",
     total: "Cəmi",
-    onLift: "Rampada",
+    onLift: "Müddət",
     pickWork: "Ən azı bir iş seçin.",
     closed: "Bağlı",
-    freeBays: (n) => `${n} boks boş`,
-    noSlots: "Bu gün bu həcmdə iş üçün boş boks yoxdur. Başqa gün seçin.",
-    loading: "Rampalar yoxlanılır…",
+    freeBays: (n) => `${n} qaldırıcı boş`,
+    noSlots: "Bu gün bu həcmdə iş üçün boş qaldırıcı yoxdur. Başqa gün seçin.",
+    loading: "Qaldırıcılar yoxlanılır…",
     name: "Ad",
     phone: "Telefon",
     car: "Maşın (marka və model)",
@@ -209,7 +209,7 @@ const az: Dict = {
   ticket: {
     title: "İş kartınız",
     show: "Bu kodu darvazada göstərin",
-    bay: "Boks",
+    bay: "Qaldırıcı",
     arrive: "Gəliş",
     work: "İş",
     total: "Cəmi, sabit",
