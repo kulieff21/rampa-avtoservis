@@ -41,7 +41,9 @@ export function GarageFloor({ locale, date, isToday, serverNow, jobs, serviceNam
   const router = useRouter();
   const reduce = useReducedMotion();
   const [now, setNow] = useState(serverNow);
-  const [simNow, setSimNow] = useState(OPEN + 150);
+  // Plan mode starts at the busiest moment of the day, so the first thing a
+  // visitor sees is cars on the lifts, not a lunch-time gap.
+  const [simNow, setSimNow] = useState(() => busiestMinute(jobs));
 
   useEffect(() => {
     if (isToday || reduce) return;
@@ -208,6 +210,18 @@ export function GarageFloor({ locale, date, isToday, serverNow, jobs, serviceNam
       />
     </div>
   );
+}
+
+/** The job start (plus 10 minutes) with the most jobs running at that minute. */
+function busiestMinute(jobs: FloorJob[]): number {
+  let best = OPEN + 150;
+  let bestCount = 0;
+  for (const j of jobs) {
+    const m = j.start + 10;
+    const count = jobs.filter((k) => k.start <= m && m < k.end).length;
+    if (count > bestCount) [best, bestCount] = [m, count];
+  }
+  return best;
 }
 
 function Timeline({

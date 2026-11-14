@@ -4,6 +4,9 @@ Rampa is a fictional car workshop in Baku. This repository is its website and bo
 system: visitors pick the work, see a fixed price, and take a time when a lift is really
 free. The workshop sees every booking on an admin board.
 
+**Live: [rampa-avtoservis.vercel.app](https://rampa-avtoservis.vercel.app)** · admin at
+[/admin](https://rampa-avtoservis.vercel.app/admin) with the public demo password `rampa-demo`.
+
 ![Home page with the live workshop floor](docs/home.png)
 
 ## What it does
